@@ -1,7 +1,7 @@
 # SmartLink.Host
 
 ## Description
-SmartLink.Host is a [brief description of your project]. It aims to [explain the purpose or functionality of the project].
+SmartLink.Host is a [brief description of  project]. It aims to [explain the purpose or functionality of the project].
 
 ## Features
 - Feature 1: [Brief description]
