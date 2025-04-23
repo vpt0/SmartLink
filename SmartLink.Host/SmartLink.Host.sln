@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35818.85
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLink.Host", "SmartLink.Host\SmartLink.Host.csproj", "{D5822DB0-0813-49A0-8082-19979F162603}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{5180EB1E-3C93-4CE8-85DD-268F41EA6403}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5822DB0-0813-49A0-8082-19979F162603}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5822DB0-0813-49A0-8082-19979F162603}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5822DB0-0813-49A0-8082-19979F162603}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5822DB0-0813-49A0-8082-19979F162603}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5180EB1E-3C93-4CE8-85DD-268F41EA6403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5180EB1E-3C93-4CE8-85DD-268F41EA6403}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5180EB1E-3C93-4CE8-85DD-268F41EA6403}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5180EB1E-3C93-4CE8-85DD-268F41EA6403}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1A130CE0-F867-4DBB-AAAE-AAA00B1AB8C8}
+	EndGlobalSection
+EndGlobal
