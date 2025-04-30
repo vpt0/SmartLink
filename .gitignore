@@ -1,0 +1,19 @@
+﻿# .NET build artifacts
+**/bin/
+**/obj/
+
+# User-specific files
+*.user
+*.suo
+
+# IDE files
+.vs/
+.idea/
+
+# NuGet packages
+**/packages/
+*.nupkg
+
+# Local development
+.env
+*.local
