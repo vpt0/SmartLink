@@ -1,0 +1,27 @@
+<Window x:Class="SmartLink.Host.Views.DashboardView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SmartLink Dashboard" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Background="#2196F3" Padding="20,10">
+            <TextBlock Text="SmartLink Dashboard" 
+                       Foreground="White" 
+                       FontSize="24" 
+                       FontWeight="Bold"/>
+        </StackPanel>
+
+        <!-- Main Content -->
+        <Grid Grid.Row="1" Margin="20">
+            <TextBlock Text="Welcome to SmartLink Dashboard" 
+                       FontSize="20" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Window>

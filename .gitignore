@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿# .NET build artifacts
 **/bin/
 **/obj/
@@ -17,3 +18,7 @@
 # Local development
 .env
 *.local
+=======
+
+firebase-credentials.json
+>>>>>>> 0238eb2 (Update: Login system, error handling, and window management improvements)

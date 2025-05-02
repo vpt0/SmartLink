@@ -5,7 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+<<<<<<< HEAD
         Title="SmartLink Login" Height="450" Width="600">
+=======
+        Title="SmartLink Login" Height="450" Width="500">
+>>>>>>> 0238eb2 (Update: Login system, error handling, and window management improvements)
     
     <Grid Background="#F0F0F0">
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" 
@@ -13,6 +17,10 @@
             <!-- Logo -->
             <TextBlock Text="SMARTLINK" 
                        FontSize="28" 
+<<<<<<< HEAD
+=======
+                       FontWeight="Bold"
+>>>>>>> 0238eb2 (Update: Login system, error handling, and window management improvements)
                        Foreground="#0F4C81"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,30"/>
@@ -29,8 +37,18 @@
                 <TextBlock Text="Password" Margin="0,0,0,5"/>
                 <PasswordBox x:Name="txtPassword"
                              Padding="8"
+<<<<<<< HEAD
                              Margin="0,0,0,20"/>
 
+=======
+                             Margin="0,0,0,5"/>
+                
+                <!-- Remember Me -->
+                <CheckBox x:Name="chkRememberMe" 
+                          Content="Remember me" 
+                          Margin="0,10,0,20"/>
+                
+>>>>>>> 0238eb2 (Update: Login system, error handling, and window management improvements)
                 <!-- Login Button -->
                 <Button Content="LOGIN" 
                         Background="#0F4C81"
@@ -38,6 +56,27 @@
                         Padding="10,5"
                         Margin="0,10"
                         Click="Login_Click"/>
+<<<<<<< HEAD
+=======
+                
+                <!-- Create Account -->
+                <Button Content="CREATE ACCOUNT" 
+                        Background="Transparent"
+                        Foreground="#0F4C81"
+                        BorderThickness="0"
+                        Padding="10,5"
+                        Margin="0,5"
+                        Click="CreateAccount_Click"/>
+                
+                <!-- Forgot Password -->
+                <Button Content="Forgot Password?" 
+                        Background="Transparent"
+                        Foreground="#555555"
+                        BorderThickness="0"
+                        Padding="10,5"
+                        Margin="0,5"
+                        Click="ForgotPassword_Click"/>
+>>>>>>> 0238eb2 (Update: Login system, error handling, and window management improvements)
             </StackPanel>
         </StackPanel>
     </Grid>
