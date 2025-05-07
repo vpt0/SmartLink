@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Host\\SmartLink.Host.csproj": {}
+    "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Host\\SmartLink.Host.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj": {
+    "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj",
+        "projectUniqueName": "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj",
         "projectName": "SmartLink.Core",
-        "projectPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj",
+        "projectPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj",
         "packagesPath": "C:\\Users\\nt667\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\obj\\",
+        "outputPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Core\\SmartLink.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -69,14 +69,14 @@
         }
       }
     },
-    "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Host\\SmartLink.Host.csproj": {
+    "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Host\\SmartLink.Host.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Host\\SmartLink.Host.csproj",
+        "projectUniqueName": "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Host\\SmartLink.Host.csproj",
         "projectName": "SmartLink.Host",
-        "projectPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Host\\SmartLink.Host.csproj",
+        "projectPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Host\\SmartLink.Host.csproj",
         "packagesPath": "C:\\Users\\nt667\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Host\\obj\\",
+        "outputPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Host\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -97,8 +97,8 @@
           "net9.0-windows7.0": {
             "targetAlias": "net9.0-windows",
             "projectReferences": {
-              "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj": {
-                "projectPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj"
+              "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj": {
+                "projectPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj"
               }
             }
           }
@@ -119,6 +119,14 @@
         "net9.0-windows7.0": {
           "targetAlias": "net9.0-windows",
           "dependencies": {
+            "FirebaseAuthentication.net": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "Google.Cloud.Firestore": {
+              "target": "Package",
+              "version": "[3.10.0, )"
+            },
             "MaterialDesignColors": {
               "target": "Package",
               "version": "[5.2.1, )"

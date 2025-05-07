@@ -1,83 +1,32 @@
 <Window x:Class="SmartLink.Host.Views.LoginView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
-<<<<<<< HEAD
-        Title="SmartLink Login" Height="450" Width="600">
-=======
-        Title="SmartLink Login" Height="450" Width="500">
->>>>>>> 0238eb2 (Update: Login system, error handling, and window management improvements)
-    
-    <Grid Background="#F0F0F0">
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" 
-                    Width="300" Margin="20">
-            <!-- Logo -->
-            <TextBlock Text="SMARTLINK" 
-                       FontSize="28" 
-<<<<<<< HEAD
-=======
-                       FontWeight="Bold"
->>>>>>> 0238eb2 (Update: Login system, error handling, and window management improvements)
-                       Foreground="#0F4C81"
-                       HorizontalAlignment="Center"
-                       Margin="0,0,0,30"/>
-            
-            <!-- Login Form -->
-            <StackPanel>
-                <!-- Email Input -->
-                <TextBlock Text="Email" Margin="0,0,0,5"/>
-                <TextBox x:Name="txtEmail" 
-                         Padding="8"
-                         Margin="0,0,0,15"/>
-                
-                <!-- Password Input -->
-                <TextBlock Text="Password" Margin="0,0,0,5"/>
-                <PasswordBox x:Name="txtPassword"
-                             Padding="8"
-<<<<<<< HEAD
-                             Margin="0,0,0,20"/>
-
-=======
-                             Margin="0,0,0,5"/>
-                
-                <!-- Remember Me -->
-                <CheckBox x:Name="chkRememberMe" 
-                          Content="Remember me" 
-                          Margin="0,10,0,20"/>
-                
->>>>>>> 0238eb2 (Update: Login system, error handling, and window management improvements)
-                <!-- Login Button -->
-                <Button Content="LOGIN" 
-                        Background="#0F4C81"
-                        Foreground="White"
-                        Padding="10,5"
-                        Margin="0,10"
-                        Click="Login_Click"/>
-<<<<<<< HEAD
-=======
-                
-                <!-- Create Account -->
-                <Button Content="CREATE ACCOUNT" 
-                        Background="Transparent"
-                        Foreground="#0F4C81"
-                        BorderThickness="0"
-                        Padding="10,5"
-                        Margin="0,5"
-                        Click="CreateAccount_Click"/>
-                
-                <!-- Forgot Password -->
-                <Button Content="Forgot Password?" 
-                        Background="Transparent"
-                        Foreground="#555555"
-                        BorderThickness="0"
-                        Padding="10,5"
-                        Margin="0,5"
-                        Click="ForgotPassword_Click"/>
->>>>>>> 0238eb2 (Update: Login system, error handling, and window management improvements)
-            </StackPanel>
+        Title="Login" Height="350" Width="320" WindowStartupLocation="CenterScreen">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Login" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20" Grid.Row="0"/>
+        <StackPanel Grid.Row="1" Margin="0,0,0,10">
+            <TextBlock Text="Email"/>
+            <TextBox x:Name="txtEmail" Height="28"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Margin="0,0,0,10">
+            <TextBlock Text="Password"/>
+            <PasswordBox x:Name="txtPassword" Height="28"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,0,0,10">
+            <CheckBox x:Name="chkRememberMe" Content="Remember Me"/>
+            <Button Content="Forgot Password?" Margin="10,0,0,0" Click="ForgotPassword_Click"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button Content="Login" Width="100" Margin="0,0,10,0" Click="Login_Click"/>
+            <Button Content="Create Account" Width="120" Click="CreateAccount_Click"/>
         </StackPanel>
     </Grid>
 </Window>

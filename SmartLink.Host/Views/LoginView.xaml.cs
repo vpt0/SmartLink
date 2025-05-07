@@ -1,108 +1,80 @@
-<<<<<<< HEAD
-using System.Windows;
-using System.Windows.Input;
-=======
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using SmartLink.Host.Services;
->>>>>>> 0238eb2 (Update: Login system, error handling, and window management improvements)
 
 namespace SmartLink.Host.Views
 {
     public partial class LoginView : Window
     {
-<<<<<<< HEAD
-        public LoginView()
-        {
-            InitializeComponent();
-        }
-
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                DragMove();
-            }
-        }
-
-        private void Login_Click(object sender, RoutedEventArgs e)
-        {
-            // Simple validation
-            if (string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtPassword.Password))
-            {
-                MessageBox.Show("Please enter both email and password", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            // For now, just navigate to Dashboard
-            var dashboard = new Dashboard();
-            dashboard.Show();
-            this.Close();
-=======
         private readonly FirebaseService _firebaseService;
 
         public LoginView()
         {
             InitializeComponent();
             _firebaseService = FirebaseService.Instance;
+            this.Loaded += LoginView_Loaded;
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        }
+
+        private void LoginView_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Ensure window is visible
+            this.Visibility = Visibility.Visible;
+            this.Activate();
+            this.Focus();
         }
 
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
+            string email = txtEmail.Text;
+            string password = txtPassword.Password;
+
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Please enter both email and password.", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             try
             {
-                LoginButton.IsEnabled = false;
+                var userCredential = await _firebaseService.SignInWithEmailAndPasswordAsync(email, password);
 
-                string email = EmailTextBox.Text;
-                string password = PasswordBox.Password;
+                // Example: Navigate to dashboard or main window
+                var dashboard = new DashboardView(userCredential.User.Uid);
+                Application.Current.MainWindow = dashboard;
+                dashboard.Show();
 
-                if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
-                {
-                    MessageBox.Show("Please enter both email and password", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-
-                try
-                {
-                    var userCredential = await _firebaseService.SignInWithEmailAndPasswordAsync(email, password);
-
-                    var dashboard = new DashboardView(userCredential.User.Uid);
-                    Application.Current.MainWindow = dashboard;
-                    dashboard.Show();
-
-                    this.Close();
-                }
-                catch (Firebase.Auth.FirebaseAuthException)
-                {
-                    MessageBox.Show("Incorrect email or password. Please try again.", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                this.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("An unexpected error occurred. Please try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                LoginButton.IsEnabled = true;
+                MessageBox.Show($"Login failed: {ex.Message}", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void CreateAccount_Click(object sender, RoutedEventArgs e)
         {
             var createAccountView = new CreateAccountView();
-            createAccountView.EmailSet += (sender, email) =>
+            createAccountView.EmailSet += (s, email) =>
             {
-                EmailTextBox.Text = email;
-                PasswordBox.Focus();
+                txtEmail.Text = email;
+                txtPassword.Focus();
             };
+            createAccountView.ShowDialog();
+        }
 
-            bool? result = createAccountView.ShowDialog();
-
-            if (result == true)
+        private void ForgotPassword_Click(object sender, RoutedEventArgs e)
+        {
+            string email = txtEmail.Text;
+            
+            if (string.IsNullOrWhiteSpace(email))
             {
-                PasswordBox.Focus();
+                MessageBox.Show("Please enter your email address first.", "Password Reset", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
             }
->>>>>>> 0238eb2 (Update: Login system, error handling, and window management improvements)
+            
+            MessageBox.Show("Password reset functionality will be implemented in a future update.", "Coming Soon", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
