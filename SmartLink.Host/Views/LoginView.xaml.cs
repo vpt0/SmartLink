@@ -45,9 +45,9 @@ namespace SmartLink.Host.Views
                 Properties.Settings.Default.SavedEmail = Properties.Settings.Default.RememberEmail ? email : string.Empty;
                 Properties.Settings.Default.Save();
                 
-                // Navigate to main application window
-                var mainWindow = new MainWindow();
-                mainWindow.Show();
+                // Navigate to dashboard view
+                var dashboardView = new DashboardView(userCredential.User.Uid);
+                dashboardView.Show();
                 this.Close();
             }
             catch (Exception ex)
