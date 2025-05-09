@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from ram_detection import get_ram_info
+from cpu_detection import get_cpu_info
+from storage_detection import get_storage_info
 
 app = Flask(__name__)
 # Enable CORS to allow frontend to access the API
@@ -11,9 +13,12 @@ def root():
     """Root endpoint that lists available API endpoints."""
     return jsonify({
         'status': 'ok',
-        'message': 'RAM monitoring API is running',
+        'message': 'System monitoring API is running',
         'available_endpoints': {
             'RAM Information': '/api/ram',
+            'CPU Information': '/api/cpu',
+            'Storage Information': '/api/storage',
+            'System Overview': '/api/system',
             'Health Check': '/api/health'
         }
     })
@@ -49,12 +54,86 @@ def ram_info():
             'message': str(e)
         }), 500
 
+@app.route('/api/cpu', methods=['GET'])
+def cpu_info():
+    """
+    API endpoint to provide CPU information.
+    """
+    try:
+        cpu_data = get_cpu_info()
+        
+        return jsonify({
+            'status': 'success',
+            'data': cpu_data
+        })
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+@app.route('/api/storage', methods=['GET'])
+def storage_info():
+    """
+    API endpoint to provide storage information.
+    """
+    try:
+        storage_data = get_storage_info()
+        
+        return jsonify({
+            'status': 'success',
+            'data': storage_data
+        })
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+@app.route('/api/system', methods=['GET'])
+def system_overview():
+    """
+    API endpoint to provide a comprehensive system overview including RAM, CPU, and storage.
+    """
+    try:
+        # Get RAM info
+        total_ram, free_ram = get_ram_info()
+        total_num = float(total_ram.split()[0])
+        free_num = float(free_ram.split()[0])
+        used_ram = f"{round(total_num - free_num, 2)} GB"
+        ram_usage_percentage = round(((total_num - free_num) / total_num) * 100, 1)
+        
+        # Get CPU info
+        cpu_data = get_cpu_info()
+        
+        # Get storage info
+        storage_data = get_storage_info()
+        
+        return jsonify({
+            'status': 'success',
+            'data': {
+                'ram': {
+                    'total_ram': total_ram,
+                    'free_ram': free_ram,
+                    'used_ram': used_ram,
+                    'usage_percentage': ram_usage_percentage
+                },
+                'cpu': cpu_data,
+                'storage': storage_data
+            }
+        })
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
 @app.route('/api/health', methods=['GET'])
 def health_check():
     """Simple health check endpoint to verify the API is running."""
     return jsonify({
         'status': 'ok',
-        'message': 'RAM API is running'
+        'message': 'System monitoring API is running'
     })
 
 if __name__ == '__main__':
