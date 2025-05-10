@@ -1,31 +1,29 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Host\\SmartLink.Host.csproj": {}
+    "C:\\Users\\Subhrajoy\\SmartLink\\SmartLink\\SmartLink.Host\\SmartLink.Host.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj": {
+    "C:\\Users\\Subhrajoy\\SmartLink\\SmartLink\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj",
+        "projectUniqueName": "C:\\Users\\Subhrajoy\\SmartLink\\SmartLink\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj",
         "projectName": "SmartLink.Core",
-        "projectPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj",
-        "packagesPath": "C:\\Users\\nt667\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\obj\\",
+        "projectPath": "C:\\Users\\Subhrajoy\\SmartLink\\SmartLink\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj",
+        "packagesPath": "C:\\Users\\Subhrajoy\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Subhrajoy\\SmartLink\\SmartLink\\SmartLink.Core\\SmartLink.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nt667\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Subhrajoy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -60,45 +58,57 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.15, 8.0.15]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.15, 8.0.15]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.15, 8.0.15]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Host\\SmartLink.Host.csproj": {
+    "C:\\Users\\Subhrajoy\\SmartLink\\SmartLink\\SmartLink.Host\\SmartLink.Host.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Host\\SmartLink.Host.csproj",
+        "projectUniqueName": "C:\\Users\\Subhrajoy\\SmartLink\\SmartLink\\SmartLink.Host\\SmartLink.Host.csproj",
         "projectName": "SmartLink.Host",
-        "projectPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Host\\SmartLink.Host.csproj",
-        "packagesPath": "C:\\Users\\nt667\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Host\\obj\\",
+        "projectPath": "C:\\Users\\Subhrajoy\\SmartLink\\SmartLink\\SmartLink.Host\\SmartLink.Host.csproj",
+        "packagesPath": "C:\\Users\\Subhrajoy\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Subhrajoy\\SmartLink\\SmartLink\\SmartLink.Host\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nt667\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Subhrajoy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
         ],
         "originalTargetFrameworks": [
           "net9.0-windows"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0-windows7.0": {
             "targetAlias": "net9.0-windows",
             "projectReferences": {
-              "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj": {
-                "projectPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj"
+              "C:\\Users\\Subhrajoy\\SmartLink\\SmartLink\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj": {
+                "projectPath": "C:\\Users\\Subhrajoy\\SmartLink\\SmartLink\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj"
               }
             }
           }
@@ -155,7 +165,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

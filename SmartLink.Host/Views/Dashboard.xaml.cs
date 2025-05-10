@@ -2,9 +2,9 @@
 
 namespace SmartLink.Host.Views
 {
-    public partial class Dashboard : Window
+    public partial class DashboardView : Window
     {
-        public Dashboard()
+        public DashboardView()
         {
             InitializeComponent();
         }
