@@ -10,8 +10,9 @@ namespace SmartLink.Host
         public static void Main(string[] args)
         {
             var application = new Application();
-            var loginView = new LoginView();
-            application.MainWindow = loginView;
+            var dashboardView = new DashboardView();
+            application.MainWindow = dashboardView;
+            dashboardView.Show();
             application.Run();
         }
     }

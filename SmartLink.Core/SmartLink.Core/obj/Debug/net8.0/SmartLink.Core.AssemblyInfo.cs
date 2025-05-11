@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartLink.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6248863dac0c4529b693b1d3c21c2f0abb9a24dd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6f5186ca0409a425239114629383e1b653149e56")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartLink.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartLink.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
