@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace SmartLink.Host
+namespace SmartLinkAPI.Service
 {
     public class Program
     {
@@ -18,6 +12,7 @@ namespace SmartLink.Host
 
             // Add services to the container.
             builder.Services.AddControllers();
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -31,7 +26,9 @@ namespace SmartLink.Host
             }
 
             app.UseHttpsRedirection();
+
             app.UseAuthorization();
+
             app.MapControllers();
 
             app.Run();

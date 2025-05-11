@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartLink.Host.Models.Api
+namespace SmartLink.Host.Models
 {
-    public class ApiClass1
+    public class Class1
     {
-        
     }
 }
