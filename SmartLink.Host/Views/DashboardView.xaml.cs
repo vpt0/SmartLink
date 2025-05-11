@@ -15,6 +15,9 @@ namespace SmartLink.Host.Views
     {
         private string? _userId;
 
+        /// <summary>
+        /// Initializes a new instance of the DashboardView window with default settings and centers it on the screen.
+        /// </summary>
         public DashboardView()
         {
             _userId = string.Empty;
@@ -23,11 +26,18 @@ namespace SmartLink.Host.Views
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the DashboardView window with the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user ID to associate with this dashboard view.</param>
         public DashboardView(string userId) : this()
         {
             _userId = userId;
         }
 
+        /// <summary>
+        /// Ensures the window is visible, activated, and focused when it finishes loading.
+        /// </summary>
         private void DashboardView_Loaded(object sender, RoutedEventArgs e)
         {
             // Ensure window is visible
@@ -36,50 +46,80 @@ namespace SmartLink.Host.Views
             this.Focus();
         }
 
+        /// <summary>
+        /// Opens the profile editing popup and sets focus to the profile name input box.
+        /// </summary>
         private void OnProfileClick(object sender, RoutedEventArgs e)
         {
             ProfilePopup.IsOpen = true;
             ProfileNameBox.Focus();
         }
 
+        /// <summary>
+        /// Handles the event when the profile navigation is clicked by displaying a notification message.
+        /// </summary>
         private void OnProfileNavClick(object sender, RoutedEventArgs e)
         {
             // Example: Show profile section or dialog
             MessageBox.Show("Profile navigation clicked.");
         }
 
+        /// <summary>
+        /// Handles changes to the CPU cores slider value.
+        /// </summary>
         private void OnCPUCoresValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             // Optionally update UI or perform logic when CPU slider changes
         }
 
+        /// <summary>
+        /// Disables the CPU slider control when the CPU lock option is checked.
+        /// </summary>
         private void OnCPULockChecked(object sender, RoutedEventArgs e)
         {
             // Optionally lock CPU slider
             CPUSlider.IsEnabled = false;
         }
+        /// <summary>
+        /// Enables the CPU slider control when the CPU lock is unchecked.
+        /// </summary>
         private void OnCPULockUnchecked(object sender, RoutedEventArgs e)
         {
             CPUSlider.IsEnabled = true;
         }
 
+        /// <summary>
+        /// Handles changes to the RAM slider value.
+        /// </summary>
         private void OnRAMValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             // Optionally update UI or perform logic when RAM slider changes
         }
+        /// <summary>
+        /// Disables the RAM slider control when the RAM lock option is checked.
+        /// </summary>
         private void OnRAMLockChecked(object sender, RoutedEventArgs e)
         {
             RAMSlider.IsEnabled = false;
         }
+        /// <summary>
+        /// Enables the RAM slider control when the RAM lock is unchecked.
+        /// </summary>
         private void OnRAMLockUnchecked(object sender, RoutedEventArgs e)
         {
             RAMSlider.IsEnabled = true;
         }
+        /// <summary>
+        /// Handles the Home button click event by displaying a message indicating home navigation was triggered.
+        /// </summary>
         private void OnHomeClick(object sender, RoutedEventArgs e)
         {
             // Example: Show home section or dialog
             MessageBox.Show("Home navigation clicked.");
         }
+        /// <summary>
+        /// Saves the profile name and email from the popup fields to the main profile fields and closes the profile popup.
+        /// </summary>
         private void OnProfileSaveClick(object sender, RoutedEventArgs e)
         {
             string name = PopupProfileNameBox.Text;
@@ -91,21 +131,33 @@ namespace SmartLink.Host.Views
             ProfilePopup.IsOpen = false;
         }
 
+        /// <summary>
+        /// Handles changes to the Storage slider value.
+        /// </summary>
         private void OnStorageValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             // Optionally update UI or perform logic when Storage slider changes
         }
 
+        /// <summary>
+        /// Disables the storage slider control when the storage lock is checked.
+        /// </summary>
         private void OnStorageLockChecked(object sender, RoutedEventArgs e)
         {
             StorageSlider.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Enables the storage slider control when the storage lock is unchecked.
+        /// </summary>
         private void OnStorageLockUnchecked(object sender, RoutedEventArgs e)
         {
             StorageSlider.IsEnabled = true;
         }
 
+        /// <summary>
+        /// Generates a resource-sharing link based on current CPU, RAM, and storage selections, displays it, and simulates a delayed connection request popup.
+        /// </summary>
         private void OnGenerateLinkClick(object sender, RoutedEventArgs e)
         {
             // Generate a link based on selected resources
@@ -129,6 +181,9 @@ namespace SmartLink.Host.Views
             });
         }
         
+        /// <summary>
+        /// Handles the event when the session termination button is clicked by displaying a confirmation message.
+        /// </summary>
         private void OnTerminateSessionClick(object sender, RoutedEventArgs e)
         {
             // In a real app, this would terminate the active session
@@ -136,6 +191,9 @@ namespace SmartLink.Host.Views
             // Additional cleanup logic would go here
         }
 
+        /// <summary>
+        /// Copies the generated link text to the clipboard and displays a confirmation message.
+        /// </summary>
         private void OnCopyLinkClick(object sender, RoutedEventArgs e)
         {
             // Copy the link to clipboard
@@ -143,6 +201,9 @@ namespace SmartLink.Host.Views
             MessageBox.Show("Link copied to clipboard!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         
+        /// <summary>
+        /// Handles the acceptance of a connection request by displaying a confirmation message and closing the connection request popup.
+        /// </summary>
         private void OnAcceptConnectionClick(object sender, RoutedEventArgs e)
         {
             // In a real app, this would establish the connection with the remote user
@@ -150,6 +211,9 @@ namespace SmartLink.Host.Views
             ConnectionRequestPopup.IsOpen = false;
         }
         
+        /// <summary>
+        /// Handles the rejection of a connection request by displaying a confirmation message and closing the connection request popup.
+        /// </summary>
         private void OnRejectConnectionClick(object sender, RoutedEventArgs e)
         {
             // In a real app, this would reject the connection request
