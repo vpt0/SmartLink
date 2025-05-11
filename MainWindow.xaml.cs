@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,6 +16,9 @@ namespace SmartLink.Host;
 /// </summary>
 public partial class MainWindow : Window
 {
+    /// <summary>
+    /// Initializes a new instance of the MainWindow class and loads its UI components.
+    /// </summary>
     public MainWindow()
     {
         InitializeComponent();
