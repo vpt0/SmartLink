@@ -452,11 +452,16 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     
-                                    <TextBlock Text="RAM (GB)" FontWeight="SemiBold" FontSize="14"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding ElementName=RAMSlider, Path=Value}" FontWeight="SemiBold" FontSize="14" Margin="0,0,12,0"/>
-                                    <ToggleButton Grid.Column="2" Style="{StaticResource ToggleSwitchStyle}" Checked="OnRAMLockChecked" Unchecked="OnRAMLockUnchecked"/>
+                                    <TextBlock Text="RAM Usage" FontWeight="SemiBold" FontSize="14"/>
+                                    <StackPanel Grid.Column="1" Orientation="Vertical" Margin="0,0,12,0">
+                                        <TextBlock x:Name="RAMUsageText" Text="0%" FontWeight="SemiBold" FontSize="14" HorizontalAlignment="Right"/>
+                                        <TextBlock x:Name="RAMTotalText" Text="Total: 0 GB" FontSize="12" Foreground="#666" HorizontalAlignment="Right"/>
+                                        <TextBlock x:Name="RAMAvailableText" Text="Available: 0 GB" FontSize="12" Foreground="#666" HorizontalAlignment="Right"/>
+                                        <TextBlock x:Name="RAMUsedText" Text="Used: 0 GB" FontSize="12" Foreground="#666" HorizontalAlignment="Right"/>
+                                    </StackPanel>
+                                    <ToggleButton x:Name="RAMLockCheckbox" Grid.Column="2" Style="{StaticResource ToggleSwitchStyle}" Checked="OnRAMLockChecked" Unchecked="OnRAMLockUnchecked"/>
                                 </Grid>
-                                <Slider x:Name="RAMSlider" Minimum="2" Maximum="32" Value="8" TickFrequency="2" IsSnapToTickEnabled="True" ValueChanged="OnRAMValueChanged" Style="{StaticResource BlueSliderStyle}"/>
+                                <Slider x:Name="RAMSlider" Minimum="0" Maximum="100" Value="0" ValueChanged="OnRAMValueChanged" Style="{StaticResource BlueSliderStyle}"/>
                                 
                                 <!-- Storage Allocation -->
                                 <Grid Margin="16,16,0,8">

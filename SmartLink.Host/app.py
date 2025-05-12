@@ -1,8 +1,9 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 from ram_detection import get_ram_info
 from cpu_detection import get_cpu_info
 from storage_detection import get_storage_info
+from system_monitor import get_system_stats
 
 app = Flask(__name__)
 # Enable CORS to allow frontend to access the API
@@ -19,6 +20,7 @@ def root():
             'CPU Information': '/api/cpu',
             'Storage Information': '/api/storage',
             'System Overview': '/api/system',
+            'Real-time Monitoring': '/api/monitor',
             'Health Check': '/api/health'
         }
     })
@@ -128,6 +130,27 @@ def system_overview():
             'message': str(e)
         }), 500
 
+@app.route('/api/monitor', methods=['GET'])
+def real_time_monitor():
+    """
+    API endpoint to provide real-time system monitoring data for dashboard display.
+    This endpoint uses the integrated system_monitor module to get comprehensive stats.
+    """
+    try:
+        # Get comprehensive system stats from the system_monitor module
+        system_stats = get_system_stats()
+        
+        return jsonify({
+            'status': 'success',
+            'timestamp': system_stats['timestamp'],
+            'data': system_stats
+        })
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
 @app.route('/api/health', methods=['GET'])
 def health_check():
     """Simple health check endpoint to verify the API is running."""
@@ -135,6 +158,11 @@ def health_check():
         'status': 'ok',
         'message': 'System monitoring API is running'
     })
+
+@app.route('/dashboard', methods=['GET'])
+def system_dashboard():
+    """Render the system monitoring dashboard."""
+    return render_template('system_dashboard.html')
 
 if __name__ == '__main__':
     # For development only - change to proper configuration for production
