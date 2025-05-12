@@ -1,5 +1,4 @@
-{
-  "Version": 1,
-  "ManifestType": "Build",
-  "Endpoints": []
-}
+# Ignore .NET build outputs and static asset manifests
+**/bin/
+**/obj/
+**/staticwebassets.*.json
