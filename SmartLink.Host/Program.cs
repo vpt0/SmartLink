@@ -1,8 +1,12 @@
 using System;
 using System.Windows;
+<<<<<<< HEAD
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SmartLink.Host.Services;
+=======
+using SmartLink.Host.Views;
+>>>>>>> eee952ce3da11a2d061ccfb915d29686bd487330
 
 namespace SmartLink.Host
 {
@@ -17,7 +21,9 @@ namespace SmartLink.Host
             var serviceProvider = services.BuildServiceProvider();
             
             var application = new Application();
-            application.StartupUri = new Uri("Views/LoginView.xaml", UriKind.Relative);
+            var dashboardView = new DashboardView();
+            application.MainWindow = dashboardView;
+            dashboardView.Show();
             application.Run();
         }
 
