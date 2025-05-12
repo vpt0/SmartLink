@@ -8,12 +8,15 @@ using System.Windows.Documents;
 using System.Windows.Data;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
+using System.Threading.Tasks;
+using SmartLink.Host;
 
 namespace SmartLink.Host.Views
 {
     public partial class DashboardView : Window
     {
         private string? _userId;
+        private SystemMonitorService _monitorService;
 
         public DashboardView()
         {
@@ -21,6 +24,10 @@ namespace SmartLink.Host.Views
             InitializeComponent();
             this.Loaded += DashboardView_Loaded;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            
+            // Initialize system monitor service
+            _monitorService = new SystemMonitorService();
+            _monitorService.SystemStatsUpdated += OnSystemStatsUpdated;
         }
 
         public DashboardView(string userId) : this()
@@ -34,6 +41,15 @@ namespace SmartLink.Host.Views
             this.Visibility = Visibility.Visible;
             this.Activate();
             this.Focus();
+            
+            // Start monitoring system resources
+            _monitorService.StartMonitoring();
+            
+            // Initial RAM info fetch
+            Task.Run(async () => {
+                var ramInfo = await _monitorService.GetRamInfo();
+                UpdateRamDisplay(ramInfo);
+            });
         }
 
         private void OnProfileClick(object sender, RoutedEventArgs e)
@@ -65,7 +81,32 @@ namespace SmartLink.Host.Views
 
         private void OnRAMValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            // Optionally update UI or perform logic when RAM slider changes
+            // Update UI when RAM slider changes
+            // This is now handled by the SystemMonitorService
+        }
+        
+        private void OnSystemStatsUpdated(object sender, SystemStatsEventArgs e)
+        {
+            // Update UI with the latest RAM information
+            Dispatcher.Invoke(() => {
+                UpdateRamDisplay(e.RamInfo);
+            });
+        }
+        
+        private void UpdateRamDisplay(RamInfo ramInfo)
+        {
+            // Update RAM display elements
+            RAMUsageText.Text = $"{ramInfo.UsagePercentage}%";
+            RAMTotalText.Text = $"Total: {ramInfo.TotalRam}";
+            RAMAvailableText.Text = $"Available: {ramInfo.FreeRam}";
+            RAMUsedText.Text = $"Used: {ramInfo.UsedRam}";
+            
+            // Update RAM slider to reflect current usage
+            if (!RAMLockCheckbox.IsChecked.GetValueOrDefault())
+            {
+                // Only update if not locked
+                RAMSlider.Value = ramInfo.UsagePercentage;
+            }
         }
         private void OnRAMLockChecked(object sender, RoutedEventArgs e)
         {
