@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OON9QkkGt7E=",
+  "dgSpecHash": "ge9Zze53ypg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Api\\SmartLink.Api.csproj",
+  "projectFilePath": "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Api\\SmartLink.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nt667\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\nt667\\.nuget\\packages\\microsoft.openapi\\1.6.14\\microsoft.openapi.1.6.14.nupkg.sha512",

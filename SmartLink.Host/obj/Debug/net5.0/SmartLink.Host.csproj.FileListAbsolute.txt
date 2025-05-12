@@ -1,0 +1,6 @@
+C:\Users\nt667\source\repos\Smart-Link\SmartLink.Host\obj\Debug\net5.0\SmartLink.Host.csproj.AssemblyReference.cache
+C:\Users\nt667\source\repos\Smart-Link\SmartLink.Host\obj\Debug\net5.0\SmartLink.Host.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nt667\source\repos\Smart-Link\SmartLink.Host\obj\Debug\net5.0\SmartLink.Host.AssemblyInfoInputs.cache
+C:\Users\nt667\source\repos\Smart-Link\SmartLink.Host\obj\Debug\net5.0\SmartLink.Host.AssemblyInfo.cs
+C:\Users\nt667\source\repos\Smart-Link\SmartLink.Host\obj\Debug\net5.0\SmartLink.Host.csproj.CoreCompileInputs.cache
+C:\Users\nt667\source\repos\Smart-Link\SmartLink.Host\obj\Debug\net5.0\SmartLink.Host.sourcelink.json

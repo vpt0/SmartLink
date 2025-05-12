@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Web\\SmartLink.Web\\SmartLink.Web.csproj": {}
+    "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Web\\SmartLink.Web\\SmartLink.Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj": {
+    "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj",
+        "projectUniqueName": "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj",
         "projectName": "SmartLink.Core",
-        "projectPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj",
+        "projectPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj",
         "packagesPath": "C:\\Users\\nt667\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\obj\\",
+        "outputPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Core\\SmartLink.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -69,14 +69,14 @@
         }
       }
     },
-    "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Web\\SmartLink.Web\\SmartLink.Web.csproj": {
+    "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Web\\SmartLink.Web\\SmartLink.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Web\\SmartLink.Web\\SmartLink.Web.csproj",
+        "projectUniqueName": "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Web\\SmartLink.Web\\SmartLink.Web.csproj",
         "projectName": "SmartLink.Web",
-        "projectPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Web\\SmartLink.Web\\SmartLink.Web.csproj",
+        "projectPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Web\\SmartLink.Web\\SmartLink.Web.csproj",
         "packagesPath": "C:\\Users\\nt667\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Web\\SmartLink.Web\\obj\\",
+        "outputPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Web\\SmartLink.Web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -97,8 +97,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj": {
-                "projectPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link-Windows\\SmartLink.Root\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj"
+              "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj": {
+                "projectPath": "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Core\\SmartLink.Core\\SmartLink.Core.csproj"
               }
             }
           }
