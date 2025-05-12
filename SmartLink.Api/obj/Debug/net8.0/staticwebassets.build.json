@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "DxguQt5wOfS0ThJJDczBQrkiu8uEBI1lOQq1KqNdScM=",
+  "Source": "SmartLink.Api",
+  "BasePath": "_content/SmartLink.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
