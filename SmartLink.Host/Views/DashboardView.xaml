@@ -1,27 +1,507 @@
 <Window x:Class="SmartLink.Host.Views.DashboardView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="SmartLink Dashboard" Height="450" Width="800">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="SmartLink Dashboard" Height="700" Width="1000" Background="#F7F9FB">
+    
+    <Window.Resources>
+        <!-- Drop Shadow Effect -->
+        <DropShadowEffect x:Key="DropShadowEffect" ShadowDepth="2" Direction="270" Color="#DDDDDD" Opacity="0.5" BlurRadius="10"/>
+        
+        <!-- Button Style -->
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#1A2B50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#0D1B3A"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        <!-- Secondary Button Style -->
+        <Style x:Key="SecondaryButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#E0E0E0"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#CCCCCC"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        <!-- Help Button Style -->
+        <Style x:Key="HelpButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Background" Value="#F0F0F0"/>
+            <Setter Property="Foreground" Value="#666"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Slider Styles -->
+        <Style x:Key="OrangeSliderStyle" TargetType="Slider">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FF5722"/>
+        </Style>
+        
+        <Style x:Key="BlueSliderStyle" TargetType="Slider">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#2196F3"/>
+        </Style>
+        
+        <Style x:Key="GreenSliderStyle" TargetType="Slider">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#4CAF50"/>
+        </Style>
+        
+        <!-- Toggle Switch Style -->
+        <Style x:Key="ToggleSwitchStyle" TargetType="ToggleButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid>
+                            <Border x:Name="BackgroundBorder" Width="50" Height="24" CornerRadius="12" Background="#CCCCCC">
+                                <Border x:Name="Indicator" Width="16" Height="16" CornerRadius="8" Background="White" 
+                                        HorizontalAlignment="Left" Margin="4,0,0,0" VerticalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="BackgroundBorder" Property="Background" Value="#2196F3"/>
+                                <Setter TargetName="Indicator" Property="HorizontalAlignment" Value="Right"/>
+                                <Setter TargetName="Indicator" Property="Margin" Value="0,0,4,0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Card Style -->
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+            <Setter Property="Effect" Value="{StaticResource DropShadowEffect}"/>
+        </Style>
+        
+        <!-- Nav Button Style -->
+        <Style x:Key="NavButtonStyle" TargetType="RadioButton">
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid Background="Transparent">
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="{TemplateBinding Tag}" FontSize="18" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{TemplateBinding Content}" FontSize="12" 
+                                           Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Foreground" Value="#1976D2"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Foreground" Value="#666666"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!-- Header -->
-        <StackPanel Grid.Row="0" Background="#2196F3" Padding="20,10">
-            <TextBlock Text="SmartLink Dashboard" 
-                       Foreground="White" 
-                       FontSize="24" 
-                       FontWeight="Bold"/>
-        </StackPanel>
-
-        <!-- Main Content -->
-        <Grid Grid.Row="1" Margin="20">
-            <TextBlock Text="Welcome to SmartLink Dashboard" 
-                       FontSize="20" 
-                       HorizontalAlignment="Center" 
-                       VerticalAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="145"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Left Sidebar -->
+        <Border Grid.Column="0" Background="White" BorderBrush="#F0F0F0" BorderThickness="0,0,1,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <!-- User Avatar and Profile -->
+                <Border Grid.Row="0" Padding="24,24,24,12" Cursor="Hand">
+                    <Grid>
+                        <Ellipse Width="60" Height="60" Fill="#E0E4E8"/>
+                        <TextBlock Text="Kaju" FontSize="16" Foreground="#333" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Button Width="60" Height="60" Background="Transparent" BorderThickness="0" Click="OnProfileClick">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Grid>
+                                        <ContentPresenter/>
+                                        <TextBlock Text="Edit" FontSize="12" Foreground="#666" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,4"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <!-- Popup for Profile Edit -->
+                        <Popup x:Name="ProfilePopup" Placement="Right" PlacementTarget="{Binding ElementName=ProfileNameBox}" StaysOpen="False">
+                            <Border Background="White" CornerRadius="8" Padding="16" Effect="{StaticResource DropShadowEffect}">
+                                <StackPanel>
+                                    <TextBlock Text="Edit Profile" FontWeight="Bold" FontSize="16" Margin="0,0,0,8"/>
+                                    <TextBox x:Name="PopupProfileNameBox" Text="John" Width="180" Margin="0,0,0,8">
+                                        <TextBox.Style>
+                                            <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="TextBox">
+                                                            <Grid>
+                                                                <TextBox Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                                         x:Name="textSource" 
+                                                                         Background="{TemplateBinding Background}" 
+                                                                         BorderBrush="{TemplateBinding BorderBrush}" 
+                                                                         BorderThickness="{TemplateBinding BorderThickness}" 
+                                                                         Foreground="{TemplateBinding Foreground}"/>
+                                                                <TextBlock Text="Name" 
+                                                                           Foreground="Gray" 
+                                                                           Visibility="Collapsed"
+                                                                           IsHitTestVisible="False" 
+                                                                           Margin="5,2,0,0">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Style.Triggers>
+                                                                                <DataTrigger Binding="{Binding Text, ElementName=textSource}" Value="">
+                                                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                                                </DataTrigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                            </Grid>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                    <TextBox x:Name="PopupProfileEmailBox" Text="john@example.com" Width="180">
+                                        <TextBox.Style>
+                                            <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="TextBox">
+                                                            <Grid>
+                                                                <TextBox Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                                         x:Name="textSource" 
+                                                                         Background="{TemplateBinding Background}" 
+                                                                         BorderBrush="{TemplateBinding BorderBrush}" 
+                                                                         BorderThickness="{TemplateBinding BorderThickness}" 
+                                                                         Foreground="{TemplateBinding Foreground}"/>
+                                                                <TextBlock Text="Email" 
+                                                                           Foreground="Gray" 
+                                                                           Visibility="Collapsed"
+                                                                           IsHitTestVisible="False" 
+                                                                           Margin="5,2,0,0">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Style.Triggers>
+                                                                                <DataTrigger Binding="{Binding Text, ElementName=textSource}" Value="">
+                                                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                                                </DataTrigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+                                                            </Grid>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                    <Button Content="Save" Style="{StaticResource PrimaryButtonStyle}" Margin="0,8,0,0" Click="OnProfileSaveClick"/>
+                                </StackPanel>
+                            </Border>
+                        </Popup>
+                        <!-- Editable Profile Fields -->
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="70,0,0,0">
+                            <TextBox x:Name="ProfileNameBox" Text="John" Width="120" Margin="0,0,0,4"/>
+                            <TextBox x:Name="ProfileEmailBox" Text="john" Width="120"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                
+                <!-- Navigation Menu -->
+                <StackPanel Grid.Row="1" Margin="0,24,0,0">
+                    <RadioButton Content="Home" Tag="🏠" Style="{StaticResource NavButtonStyle}" GroupName="Nav" IsChecked="True" Click="OnHomeClick"/>
+                    <RadioButton Content="Profile" Tag="👤" Style="{StaticResource NavButtonStyle}" GroupName="Nav" Click="OnProfileNavClick"/>
+                </StackPanel>
+                
+                <!-- Connection Status -->
+                <TextBlock Grid.Row="2" Text="Connected" HorizontalAlignment="Center" Foreground="#666" Margin="0,0,0,24"/>
+            </Grid>
+        </Border>
+        
+        <!-- Main Content Area -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Header -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Text="SmartLink" FontSize="28" FontWeight="Bold" VerticalAlignment="Center" Margin="32,0,0,0"/>
+                
+                
+            </Grid>
+            
+            <!-- Content Area -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <Grid Margin="32,0,32,32">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Left Column -->
+                    <StackPanel Grid.Column="0" Margin="0,0,16,0">
+                        <!-- System Info Card -->
+                        <Border Style="{StaticResource CardStyle}">
+                            <StackPanel Margin="24">
+                                <TextBlock Text="System Info" FontSize="18" FontWeight="Bold" Margin="0,0,0,24"/>
+                                
+                                <!-- Vertical Usage Columns for RAM, CPU, Storage -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,16">
+                                    <!-- RAM Column -->
+                                    <StackPanel Margin="0,0,24,0">
+                                        <Border Height="120" Width="32" Background="#E3F2FD" CornerRadius="8" VerticalAlignment="Bottom">
+                                            <Border Height="80" Width="32" Background="#1976D2" CornerRadius="8,8,0,0" VerticalAlignment="Bottom"/>
+                                        </Border>
+                                        <TextBlock Text="RAM" HorizontalAlignment="Center" Margin="0,8,0,0" FontWeight="SemiBold"/>
+                                        <TextBlock Text="4 GB / 8 GB" HorizontalAlignment="Center" FontSize="12" Foreground="#1976D2"/>
+                                    </StackPanel>
+                                    <!-- CPU Column -->
+                                    <StackPanel>
+                                        <Border Height="120" Width="32" Background="#FFF3E0" CornerRadius="8" VerticalAlignment="Bottom">
+                                            <Border Height="60" Width="32" Background="#FF9800" CornerRadius="8,8,0,0" VerticalAlignment="Bottom"/>
+                                        </Border>
+                                        <TextBlock Text="CPU" HorizontalAlignment="Center" Margin="0,8,0,0" FontWeight="SemiBold"/>
+                                        <TextBlock Text="2 / 6 Cores" HorizontalAlignment="Center" FontSize="12" Foreground="#FF9800"/>
+                                    </StackPanel>
+                                    <!-- Storage Column -->
+                                    <StackPanel>
+                                        <Border Height="120" Width="32" Background="#E8F5E9" CornerRadius="8" VerticalAlignment="Bottom">
+                                            <Border Height="100" Width="32" Background="#43A047" CornerRadius="8,8,0,0" VerticalAlignment="Bottom"/>
+                                        </Border>
+                                        <TextBlock Text="Storage" HorizontalAlignment="Center" Margin="0,8,0,0" FontWeight="SemiBold"/>
+                                        <TextBlock Text="100 GB / 256 GB" HorizontalAlignment="Center" FontSize="12" Foreground="#43A047"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                
+                                <!-- Storage Usage -->
+                                <Border BorderBrush="#EEEEEE" BorderThickness="1" CornerRadius="8" Margin="0,8,0,0">
+                                    <Grid Margin="16,12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <TextBlock Text="💾" FontSize="18" Margin="0,0,12,0"/>
+                                        <TextBlock Grid.Column="1" Text="100 GB free" VerticalAlignment="Center" FontSize="14"/>
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                        
+                        <!-- Terminate Session Button -->
+                        <Border Style="{StaticResource CardStyle}">
+                            <StackPanel Margin="24">
+                                <Button x:Name="TerminateSessionButton" Background="#C9000F" Foreground="White" FontWeight="Bold" Padding="16,12" Content="Terminate Session" BorderThickness="0" Click="OnTerminateSessionClick">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}" 
+                                                    BorderBrush="{TemplateBinding BorderBrush}" 
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    CornerRadius="8">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                        
+                        <!-- Connection Request Popup -->
+                        <Popup x:Name="ConnectionRequestPopup" Placement="Center" StaysOpen="False">
+                            <Border Background="White" CornerRadius="8" Padding="24" Width="350" Effect="{StaticResource DropShadowEffect}">
+                                <StackPanel>
+                                    <TextBlock Text="Connection Request" FontWeight="Bold" FontSize="18" Margin="0,0,0,16"/>
+                                    <TextBlock Text="User*** is trying to connect" FontSize="14" Margin="0,0,0,24"/>
+                                    
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <Button x:Name="RejectConnectionButton" Grid.Column="0" Content="Reject" Margin="0,0,8,0" Background="#C9000F" Foreground="White" Padding="12,8" Click="OnRejectConnectionClick">
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border Background="{TemplateBinding Background}" 
+                                                            BorderBrush="{TemplateBinding BorderBrush}" 
+                                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                                            CornerRadius="8">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                        </Button>
+                                        
+                                        <Button x:Name="AcceptConnectionButton" Grid.Column="1" Content="Accept" Margin="8,0,0,0" Background="#4CAF50" Foreground="White" Padding="12,8" Click="OnAcceptConnectionClick">
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border Background="{TemplateBinding Background}" 
+                                                            BorderBrush="{TemplateBinding BorderBrush}" 
+                                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                                            CornerRadius="8">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                        </Button>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+                        </Popup>
+                    </StackPanel>
+                    
+                    <!-- Right Column -->
+                    <StackPanel Grid.Column="1" Margin="16,0,0,0">
+                        <!-- Sharing Controls Card -->
+                        <Border Style="{StaticResource CardStyle}">
+                            <StackPanel Margin="24">
+                                <TextBlock Text="Sharing Controls" FontSize="18" FontWeight="Bold" Margin="0,0,0,24"/>
+                                
+                                <!-- CPU Cores -->
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <TextBlock Text="CPU Cores" FontWeight="SemiBold" FontSize="14"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding ElementName=CPUSlider, Path=Value}" FontWeight="SemiBold" FontSize="14" Margin="0,0,12,0"/>
+                                    <ToggleButton Grid.Column="2" Style="{StaticResource ToggleSwitchStyle}" Checked="OnCPULockChecked" Unchecked="OnCPULockUnchecked"/>
+                                </Grid>
+                                
+                                <Slider x:Name="CPUSlider" Minimum="1" Maximum="6" Value="2" TickFrequency="1" IsSnapToTickEnabled="True" ValueChanged="OnCPUCoresValueChanged" Style="{StaticResource OrangeSliderStyle}"/>
+                                <!-- RAM Allocation -->
+                                <Grid Margin="16,16,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <TextBlock Text="RAM Usage" FontWeight="SemiBold" FontSize="14"/>
+                                    <StackPanel Grid.Column="1" Orientation="Vertical" Margin="0,0,12,0">
+                                        <TextBlock x:Name="RAMUsageText" Text="0%" FontWeight="SemiBold" FontSize="14" HorizontalAlignment="Right"/>
+                                        <TextBlock x:Name="RAMTotalText" Text="Total: 0 GB" FontSize="12" Foreground="#666" HorizontalAlignment="Right"/>
+                                        <TextBlock x:Name="RAMAvailableText" Text="Available: 0 GB" FontSize="12" Foreground="#666" HorizontalAlignment="Right"/>
+                                        <TextBlock x:Name="RAMUsedText" Text="Used: 0 GB" FontSize="12" Foreground="#666" HorizontalAlignment="Right"/>
+                                    </StackPanel>
+                                    <ToggleButton x:Name="RAMLockCheckbox" Grid.Column="2" Style="{StaticResource ToggleSwitchStyle}" Checked="OnRAMLockChecked" Unchecked="OnRAMLockUnchecked"/>
+                                </Grid>
+                                <Slider x:Name="RAMSlider" Minimum="0" Maximum="100" Value="0" ValueChanged="OnRAMValueChanged" Style="{StaticResource BlueSliderStyle}"/>
+                                
+                                <!-- Storage Allocation -->
+                                <Grid Margin="16,16,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <TextBlock Text="Storage (GB)" FontWeight="SemiBold" FontSize="14"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding ElementName=StorageSlider, Path=Value}" FontWeight="SemiBold" FontSize="14" Margin="0,0,12,0"/>
+                                    <ToggleButton Grid.Column="2" Style="{StaticResource ToggleSwitchStyle}" Checked="OnStorageLockChecked" Unchecked="OnStorageLockUnchecked"/>
+                                </Grid>
+                                <Slider x:Name="StorageSlider" Minimum="5" Maximum="1000" Value="250" TickFrequency="50" IsSnapToTickEnabled="True" ValueChanged="OnStorageValueChanged" Style="{StaticResource GreenSliderStyle}"/>
+                                
+                                <!-- Link Generation Box -->
+                                <Border Margin="0,24,0,0" Background="#F5F5F5" CornerRadius="8" Padding="16">
+                                    <StackPanel>
+                                        <TextBlock Text="Generate Link" FontWeight="Bold" FontSize="16" Margin="0,0,0,12"/>
+                                        <TextBlock Text="Create a shareable link with your selected resources" FontSize="12" Foreground="#666666" Margin="0,0,0,16"/>
+                                        
+                                        <Button x:Name="GenerateLinkButton" Content="Generate Link" Style="{StaticResource PrimaryButtonStyle}" Click="OnGenerateLinkClick" Margin="0,0,0,16"/>
+                                        
+                                        <Border Background="White" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="4" Padding="12" Visibility="Collapsed" x:Name="LinkDisplayBorder">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBox x:Name="GeneratedLinkTextBox" IsReadOnly="True" BorderThickness="0" Background="Transparent"/>
+                                                <Button Grid.Column="1" Content="Copy" Style="{StaticResource SecondaryButtonStyle}" Click="OnCopyLinkClick" Margin="8,0,0,0"/>
+                                            </Grid>
+                                        </Border>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>

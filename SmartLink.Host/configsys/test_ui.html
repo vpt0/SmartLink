@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SmartLink Config Tester</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        input, select { padding: 8px; width: 100%; }
+        button { padding: 10px 15px; background: #0F4C81; color: white; border: none; cursor: pointer; }
+        pre { background: #f4f4f4; padding: 15px; overflow: auto; }
+        .config-detail { margin-top: 10px; padding: 10px; background: #f9f9f9; border-left: 4px solid #0F4C81; }
+        .config-section { margin-bottom: 15px; }
+        .config-section h3 { margin-top: 0; color: #0F4C81; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SmartLink Configuration Generator</h1>
+        
+        <div class="form-group">
+            <label>CPU Cores (comma-separated):</label>
+            <input type="text" id="cores" value="0,1,2" />
+        </div>
+        
+        <div class="form-group">
+            <label>RAM to Share (GB):</label>
+            <input type="number" id="ram" value="4.0" step="0.1" min="0.1" />
+        </div>
+        
+        <button onclick="generateConfig()">Generate Configuration</button>
+        
+        <h2>Configuration Details:</h2>
+        <div id="configDetails">
+            <div class="config-detail">
+                <p>No configuration generated yet. Click the button above to generate one.</p>
+            </div>
+        </div>
+        
+        <h2>Raw JSON:</h2>
+        <pre id="result">Configuration will appear here...</pre>
+    </div>
+    
+    <script>
+        async function generateConfig() {
+            const coresInput = document.getElementById('cores').value;
+            const ramInput = document.getElementById('ram').value;
+            
+            // Parse cores into array of integers
+            const cores = coresInput.split(',').map(core => parseInt(core.trim()));
+            
+            // Create request payload
+            const payload = {
+                selected_cores: cores,
+                selected_ram_gb: parseFloat(ramInput)
+            };
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/config/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                const data = await response.json();
+                
+                // Display formatted result
+                document.getElementById('result').textContent = 
+                    JSON.stringify(data, null, 2);
+                
+                // Display detailed configuration
+                if (data.status === 'success' && data.data.config) {
+                    const config = data.data.config;
+                    const detailsDiv = document.getElementById('configDetails');
+                    
+                    // Create a structured display that matches the format in the screenshot
+                    let html = `
+                        <div class="config-section">
+                            <h3>Metadata</h3>
+                            <p><strong>Timestamp:</strong> ${config.timestamp}</p>
+                            <p><strong>Version:</strong> 1.0</p>
+                        </div>
+                        
+                        <div class="config-section">
+                            <h3>Sharing Configuration</h3>
+                            <h4>CPU</h4>
+                            <p><strong>Core Count:</strong> ${config.resources.cpu.count}</p>
+                            <p><strong>Selected Cores:</strong> ${config.resources.cpu.specific_cores ? config.resources.cpu.specific_cores.join(', ') : 'N/A'}</p>
+                            
+                            <h4>RAM</h4>
+                            <p><strong>Allocated GB:</strong> ${config.resources.ram.amount_gb}</p>
+                            <p><strong>Allocated MB:</strong> ${config.resources.ram.amount_gb * 1024}</p>
+                        </div>
+                        
+                        <div class="config-section">
+                            <h3>System Information</h3>
+                            <h4>CPU</h4>
+                            <p><strong>Logical Processors:</strong> ${config.resources.cpu.logical_processors}</p>
+                            <p><strong>Manufacturer:</strong> ${config.resources.cpu.manufacturer}</p>
+                            <p><strong>Processor Name:</strong> ${config.resources.cpu.processor_name}</p>
+                            <p><strong>Total Cores:</strong> ${config.resources.cpu.total_cores}</p>
+                            
+                            <h4>RAM</h4>
+                            <p><strong>Status:</strong> ${config.status}</p>
+                            <p><strong>Session ID:</strong> ${config.session_id}</p>
+                        </div>
+                    `;
+                    
+                    detailsDiv.innerHTML = html;
+                }
+            } catch (error) {
+                document.getElementById('result').textContent = 
+                    `Error: ${error.message}`;
+                document.getElementById('configDetails').innerHTML = 
+                    `<div class="config-detail"><p>Error: ${error.message}</p></div>`;
+            }
+        }
+    </script>
+</body>
+</html>
