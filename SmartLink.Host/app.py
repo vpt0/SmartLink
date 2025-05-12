@@ -136,6 +136,135 @@ def health_check():
         'message': 'System monitoring API is running'
     })
 
+# Add these imports at the top
+import os
+from config_summary import generate_config_summary, format_config_as_json
+
+# Add these new endpoints
+
+@app.route('/api/config/summary', methods=['POST'])
+def create_config_summary():
+    """
+    API endpoint to create a configuration summary based on selected CPU and RAM resources.
+    """
+    try:
+        # Get data from request
+        data = request.json
+        
+        # Validate required fields
+        if 'cpu_cores' not in data or 'ram_amount' not in data:
+            return jsonify({
+                'status': 'error',
+                'message': 'Missing required fields: cpu_cores and ram_amount'
+            }), 400
+            
+        # Generate configuration summary
+        config = generate_config_summary(
+            data['cpu_cores'],
+            float(data['ram_amount'])
+        )
+        
+        # Create configs directory if it doesn't exist
+        os.makedirs('configs', exist_ok=True)
+        
+        # Save configuration to file
+        config_path = os.path.join('configs', f"{config['session_id']}.json")
+        with open(config_path, 'w') as f:
+            f.write(format_config_as_json(config))
+        
+        return jsonify(config)
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+@app.route('/api/config/summary/<session_id>', methods=['GET'])
+def get_config_summary(session_id):
+    """
+    API endpoint to retrieve a specific configuration summary by session ID.
+    """
+    try:
+        config_path = os.path.join('configs', f"{session_id}.json")
+        
+        if not os.path.exists(config_path):
+            return jsonify({
+                'status': 'error',
+                'message': f'Configuration with session ID {session_id} not found'
+            }), 404
+            
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+            
+        return jsonify(config)
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+@app.route('/api/config/summaries', methods=['GET'])
+def list_config_summaries():
+    """
+    API endpoint to list all saved configuration summaries.
+    """
+    try:
+        # Create configs directory if it doesn't exist
+        os.makedirs('configs', exist_ok=True)
+        
+        # Get all configuration files
+        config_files = [f for f in os.listdir('configs') if f.endswith('.json')]
+        
+        # Load all configurations
+        configs = []
+        for file in config_files:
+            with open(os.path.join('configs', file), 'r') as f:
+                configs.append(json.load(f))
+                
+        return jsonify(configs)
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+# Add this endpoint if not already present
+
+@app.route('/api/config/generate', methods=['POST'])
+def generate_config():
+    """
+    API endpoint to generate a configuration summary based on selected CPU and RAM resources.
+    Provides comprehensive details without saving to file.
+    """
+    try:
+        # Get data from request
+        data = request.json
+        
+        # Validate required fields
+        if 'selected_cores' not in data or 'selected_ram_gb' not in data:
+            return jsonify({
+                'status': 'error',
+                'message': 'Missing required fields: selected_cores and selected_ram_gb'
+            }), 400
+            
+        # Generate configuration summary
+        config = generate_config_summary(
+            data['selected_cores'],
+            float(data['selected_ram_gb'])
+        )
+        
+        return jsonify({
+            'status': 'success',
+            'data': {
+                'config': config
+            }
+        })
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
 if __name__ == '__main__':
     # For development only - change to proper configuration for production
     app.run(debug=True, host='0.0.0.0', port=5000)
