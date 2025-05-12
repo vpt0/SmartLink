@@ -48,6 +48,18 @@ namespace SmartLink.Host.Views
             MessageBox.Show("Profile navigation clicked.");
         }
 
+        private void OnHelpClick(object sender, RoutedEventArgs e)
+        {
+            // Show help panel popup
+            HelpPanelPopup.IsOpen = true;
+        }
+
+        private void OnConfirmSessionStart(object sender, RoutedEventArgs e)
+        {
+            // Handle session start confirmation
+            MessageBox.Show("Session started successfully!");
+        }
+
         private void OnCPUCoresValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             // Optionally update UI or perform logic when CPU slider changes
@@ -155,6 +167,18 @@ namespace SmartLink.Host.Views
             // In a real app, this would reject the connection request
             MessageBox.Show("Connection rejected!", "SmartLink", MessageBoxButton.OK, MessageBoxImage.Information);
             ConnectionRequestPopup.IsOpen = false;
+        }
+        
+        private void OnCloseHelpPanel(object sender, RoutedEventArgs e)
+        {
+            // Close the help panel popup
+            HelpPanelPopup.IsOpen = false;
+        }
+        
+        private void OnCancelSessionConfirmation(object sender, RoutedEventArgs e)
+        {
+            // Close the session confirmation popup
+            SessionConfirmationPopup.IsOpen = false;
         }
     }
 }

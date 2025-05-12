@@ -15,6 +15,7 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Width" Value="200"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -299,8 +300,49 @@
                 </Grid.ColumnDefinitions>
                 
                 <TextBlock Text="SmartLink" FontSize="28" FontWeight="Bold" VerticalAlignment="Center" Margin="32,0,0,0"/>
+                <Button Grid.Column="1" Content="Help" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,32,0" Click="OnHelpClick" ToolTip="View help information"/>
                 
-                
+                <!-- Help Panel Popup -->
+                <Popup x:Name="HelpPanelPopup" Placement="Center" StaysOpen="False">
+                    <Border Background="White" CornerRadius="8" Padding="24" Width="500" Height="400" Effect="{StaticResource DropShadowEffect}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            
+                            <TextBlock Text="SmartLink Help" FontWeight="Bold" FontSize="20" Margin="0,0,0,16"/>
+                            
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                                <StackPanel>
+                                    <TextBlock Text="Resource Sharing" FontWeight="Bold" FontSize="16" Margin="0,0,0,8"/>
+                                    <TextBlock Text="SmartLink allows you to share your computer's resources with others. You can control how much CPU, RAM, and storage you want to share." TextWrapping="Wrap" Margin="0,0,0,16"/>
+                                    
+                                    <TextBlock Text="CPU Cores" FontWeight="Bold" FontSize="14" Margin="0,0,0,4"/>
+                                    <TextBlock Text="Select the number of CPU cores you want to share. Toggle the switch to lock/unlock this setting." TextWrapping="Wrap" Margin="0,0,0,12"/>
+                                    
+                                    <TextBlock Text="RAM Allocation" FontWeight="Bold" FontSize="14" Margin="0,0,0,4"/>
+                                    <TextBlock Text="Choose how much RAM (in GB) to allocate to the shared session. Toggle the switch to lock/unlock this setting." TextWrapping="Wrap" Margin="0,0,0,12"/>
+                                    
+                                    <TextBlock Text="Storage Allocation" FontWeight="Bold" FontSize="14" Margin="0,0,0,4"/>
+                                    <TextBlock Text="Set the amount of storage space (in GB) to share. Toggle the switch to lock/unlock this setting." TextWrapping="Wrap" Margin="0,0,0,12"/>
+                                    
+                                    <TextBlock Text="Operating System" FontWeight="Bold" FontSize="14" Margin="0,0,0,4"/>
+                                    <TextBlock Text="Select which operating system environment you want to share." TextWrapping="Wrap" Margin="0,0,0,12"/>
+                                    
+                                    <TextBlock Text="Link Generation" FontWeight="Bold" FontSize="14" Margin="0,0,0,4"/>
+                                    <TextBlock Text="Click 'Generate Link' to create a shareable link with your selected settings. This link can be shared with others to connect to your shared resources." TextWrapping="Wrap" Margin="0,0,0,12"/>
+                                    
+                                    <TextBlock Text="Session Management" FontWeight="Bold" FontSize="14" Margin="0,0,0,4"/>
+                                    <TextBlock Text="You can terminate an active sharing session at any time by clicking the 'Terminate Session' button." TextWrapping="Wrap" Margin="0,0,0,12"/>
+                                </StackPanel>
+                            </ScrollViewer>
+                            
+                            <Button Grid.Row="2" Content="Close" Style="{StaticResource SecondaryButtonStyle}" HorizontalAlignment="Right" Margin="0,16,0,0" Click="OnCloseHelpPanel"/>
+                        </Grid>
+                    </Border>
+                </Popup>
             </Grid>
             
             <!-- Content Area -->
@@ -316,55 +358,70 @@
                         <!-- System Info Card -->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel Margin="24">
-                                <TextBlock Text="System Info" FontSize="18" FontWeight="Bold" Margin="0,0,0,24"/>
+                                <TextBlock Text="System Info" FontSize="18" FontWeight="Bold" Margin="0,0,0,16"/>
                                 
-                                <!-- Vertical Usage Columns for RAM, CPU, Storage -->
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,16">
-                                    <!-- RAM Column -->
-                                    <StackPanel Margin="0,0,24,0">
-                                        <Border Height="120" Width="32" Background="#E3F2FD" CornerRadius="8" VerticalAlignment="Bottom">
-                                            <Border Height="80" Width="32" Background="#1976D2" CornerRadius="8,8,0,0" VerticalAlignment="Bottom"/>
+                                <!-- Resource Usage Bars -->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- RAM Bar -->
+                                    <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                                        <Border Height="120" Width="40" Background="#E3F2FD" CornerRadius="4" HorizontalAlignment="Center">
+                                            <Border Height="60" Width="40" Background="#2196F3" VerticalAlignment="Bottom" CornerRadius="4"/>
                                         </Border>
-                                        <TextBlock Text="RAM" HorizontalAlignment="Center" Margin="0,8,0,0" FontWeight="SemiBold"/>
-                                        <TextBlock Text="4 GB / 8 GB" HorizontalAlignment="Center" FontSize="12" Foreground="#1976D2"/>
+                                        <TextBlock Text="RAM" HorizontalAlignment="Center" Margin="0,8,0,4"/>
+                                        <TextBlock Text="4 GB / 8 GB" HorizontalAlignment="Center" FontSize="12"/>
                                     </StackPanel>
-                                    <!-- CPU Column -->
-                                    <StackPanel>
-                                        <Border Height="120" Width="32" Background="#FFF3E0" CornerRadius="8" VerticalAlignment="Bottom">
-                                            <Border Height="60" Width="32" Background="#FF9800" CornerRadius="8,8,0,0" VerticalAlignment="Bottom"/>
+                                    
+                                    <!-- CPU Bar -->
+                                    <StackPanel Grid.Column="1" Margin="4,0,4,0">
+                                        <Border Height="120" Width="40" Background="#FFF3E0" CornerRadius="4" HorizontalAlignment="Center">
+                                            <Border Height="40" Width="40" Background="#FF9800" VerticalAlignment="Bottom" CornerRadius="4"/>
                                         </Border>
-                                        <TextBlock Text="CPU" HorizontalAlignment="Center" Margin="0,8,0,0" FontWeight="SemiBold"/>
-                                        <TextBlock Text="2 / 6 Cores" HorizontalAlignment="Center" FontSize="12" Foreground="#FF9800"/>
+                                        <TextBlock Text="CPU" HorizontalAlignment="Center" Margin="0,8,0,4"/>
+                                        <TextBlock Text="2 / 6 Cores" HorizontalAlignment="Center" FontSize="12"/>
                                     </StackPanel>
-                                    <!-- Storage Column -->
-                                    <StackPanel>
-                                        <Border Height="120" Width="32" Background="#E8F5E9" CornerRadius="8" VerticalAlignment="Bottom">
-                                            <Border Height="100" Width="32" Background="#43A047" CornerRadius="8,8,0,0" VerticalAlignment="Bottom"/>
+                                    
+                                    <!-- Storage Bar -->
+                                    <StackPanel Grid.Column="2" Margin="8,0,0,0">
+                                        <Border Height="120" Width="40" Background="#E8F5E9" CornerRadius="4" HorizontalAlignment="Center">
+                                            <Border Height="80" Width="40" Background="#4CAF50" VerticalAlignment="Bottom" CornerRadius="4"/>
                                         </Border>
-                                        <TextBlock Text="Storage" HorizontalAlignment="Center" Margin="0,8,0,0" FontWeight="SemiBold"/>
-                                        <TextBlock Text="100 GB / 256 GB" HorizontalAlignment="Center" FontSize="12" Foreground="#43A047"/>
+                                        <TextBlock Text="Storage" HorizontalAlignment="Center" Margin="0,8,0,4"/>
+                                        <TextBlock Text="100 GB / 256 GB" HorizontalAlignment="Center" FontSize="12"/>
                                     </StackPanel>
-                                </StackPanel>
+                                </Grid>
                                 
-                                <!-- Storage Usage -->
-                                <Border BorderBrush="#EEEEEE" BorderThickness="1" CornerRadius="8" Margin="0,8,0,0">
-                                    <Grid Margin="16,12">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        
-                                        <TextBlock Text="💾" FontSize="18" Margin="0,0,12,0"/>
-                                        <TextBlock Grid.Column="1" Text="100 GB free" VerticalAlignment="Center" FontSize="14"/>
-                                    </Grid>
+                                <!-- Free Space Indicator -->
+                                <Border Margin="0,16,0,0" Background="#F5F5F5" CornerRadius="4" Padding="12">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE74E;" FontSize="16" Margin="0,0,8,0"/>
+                                        <TextBlock Text="100 GB free" VerticalAlignment="Center"/>
+                                    </StackPanel>
                                 </Border>
+                            </StackPanel>
+                        </Border>
+                        
+                        <!-- Operating System Card -->
+                        <Border Style="{StaticResource CardStyle}">
+                            <StackPanel Margin="24">
+                                <TextBlock Text="Operating System" FontSize="18" FontWeight="Bold" Margin="0,0,0,16"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                                    <RadioButton Content="Windows" GroupName="OS" Margin="0,0,16,0"/>
+                                    <RadioButton Content="macOS" GroupName="OS" Margin="0,0,16,0"/>
+                                    <RadioButton Content="Linux" GroupName="OS" IsChecked="True"/>
+                                </StackPanel>
                             </StackPanel>
                         </Border>
                         
                         <!-- Terminate Session Button -->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel Margin="24">
-                                <Button x:Name="TerminateSessionButton" Background="#C9000F" Foreground="White" FontWeight="Bold" Padding="16,12" Content="Terminate Session" BorderThickness="0" Click="OnTerminateSessionClick">
+                                <Button x:Name="TerminateSessionButton" Background="#C9000F" Foreground="White" FontWeight="Bold" Padding="16,12" Content="Terminate Session" Width="200" BorderThickness="0" Click="OnTerminateSessionClick" ToolTip="End the current sharing session">
                                     <Button.Template>
                                         <ControlTemplate TargetType="Button">
                                             <Border Background="{TemplateBinding Background}" 
@@ -436,11 +493,13 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     
                                     <TextBlock Text="CPU Cores" FontWeight="SemiBold" FontSize="14"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding ElementName=CPUSlider, Path=Value}" FontWeight="SemiBold" FontSize="14" Margin="0,0,12,0"/>
-                                    <ToggleButton Grid.Column="2" Style="{StaticResource ToggleSwitchStyle}" Checked="OnCPULockChecked" Unchecked="OnCPULockUnchecked"/>
+                                    <Button Grid.Column="1" Content="?" Style="{StaticResource HelpButtonStyle}" Margin="4,0" ToolTip="Select the number of CPU cores to share with the connected user"/>
+                                    <TextBlock Grid.Column="2" Text="{Binding ElementName=CPUSlider, Path=Value}" FontWeight="SemiBold" FontSize="14" Margin="0,0,12,0"/>
+                                    <ToggleButton Grid.Column="3" Style="{StaticResource ToggleSwitchStyle}" Checked="OnCPULockChecked" Unchecked="OnCPULockUnchecked" ToolTip="Toggle to lock/unlock CPU core allocation"/>
                                 </Grid>
                                 
                                 <Slider x:Name="CPUSlider" Minimum="1" Maximum="6" Value="2" TickFrequency="1" IsSnapToTickEnabled="True" ValueChanged="OnCPUCoresValueChanged" Style="{StaticResource OrangeSliderStyle}"/>
@@ -450,11 +509,13 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     
                                     <TextBlock Text="RAM (GB)" FontWeight="SemiBold" FontSize="14"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding ElementName=RAMSlider, Path=Value}" FontWeight="SemiBold" FontSize="14" Margin="0,0,12,0"/>
-                                    <ToggleButton Grid.Column="2" Style="{StaticResource ToggleSwitchStyle}" Checked="OnRAMLockChecked" Unchecked="OnRAMLockUnchecked"/>
+                                    <Button Grid.Column="1" Content="?" Style="{StaticResource HelpButtonStyle}" Margin="4,0" ToolTip="Select the amount of RAM to share with the connected user"/>
+                                    <TextBlock Grid.Column="2" Text="{Binding ElementName=RAMSlider, Path=Value}" FontWeight="SemiBold" FontSize="14" Margin="0,0,12,0"/>
+                                    <ToggleButton Grid.Column="3" Style="{StaticResource ToggleSwitchStyle}" Checked="OnRAMLockChecked" Unchecked="OnRAMLockUnchecked" ToolTip="Toggle to lock/unlock RAM allocation"/>
                                 </Grid>
                                 <Slider x:Name="RAMSlider" Minimum="2" Maximum="32" Value="8" TickFrequency="2" IsSnapToTickEnabled="True" ValueChanged="OnRAMValueChanged" Style="{StaticResource BlueSliderStyle}"/>
                                 
@@ -464,11 +525,13 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     
                                     <TextBlock Text="Storage (GB)" FontWeight="SemiBold" FontSize="14"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding ElementName=StorageSlider, Path=Value}" FontWeight="SemiBold" FontSize="14" Margin="0,0,12,0"/>
-                                    <ToggleButton Grid.Column="2" Style="{StaticResource ToggleSwitchStyle}" Checked="OnStorageLockChecked" Unchecked="OnStorageLockUnchecked"/>
+                                    <Button Grid.Column="1" Content="?" Style="{StaticResource HelpButtonStyle}" Margin="4,0" ToolTip="Select the amount of storage to share with the connected user"/>
+                                    <TextBlock Grid.Column="2" Text="{Binding ElementName=StorageSlider, Path=Value}" FontWeight="SemiBold" FontSize="14" Margin="0,0,12,0"/>
+                                    <ToggleButton Grid.Column="3" Style="{StaticResource ToggleSwitchStyle}" Checked="OnStorageLockChecked" Unchecked="OnStorageLockUnchecked" ToolTip="Toggle to lock/unlock storage allocation"/>
                                 </Grid>
                                 <Slider x:Name="StorageSlider" Minimum="5" Maximum="1000" Value="250" TickFrequency="50" IsSnapToTickEnabled="True" ValueChanged="OnStorageValueChanged" Style="{StaticResource GreenSliderStyle}"/>
                                 
@@ -478,7 +541,54 @@
                                         <TextBlock Text="Generate Link" FontWeight="Bold" FontSize="16" Margin="0,0,0,12"/>
                                         <TextBlock Text="Create a shareable link with your selected resources" FontSize="12" Foreground="#666666" Margin="0,0,0,16"/>
                                         
-                                        <Button x:Name="GenerateLinkButton" Content="Generate Link" Style="{StaticResource PrimaryButtonStyle}" Click="OnGenerateLinkClick" Margin="0,0,0,16"/>
+                                        <Button x:Name="GenerateLinkButton" Content="Generate Link" Style="{StaticResource PrimaryButtonStyle}" Click="OnGenerateLinkClick" Margin="0,0,0,16" ToolTip="Create a shareable link with your selected resource settings"/>
+                                        
+                                        <!-- Confirmation Modal for Session Start -->
+                                        <Popup x:Name="SessionConfirmationPopup" Placement="Center" StaysOpen="False">
+                                            <Border Background="White" CornerRadius="8" Padding="24" Width="400" Effect="{StaticResource DropShadowEffect}">
+                                                <StackPanel>
+                                                    <TextBlock Text="Confirm Session Settings" FontWeight="Bold" FontSize="18" Margin="0,0,0,16"/>
+                                                    <TextBlock Text="You are about to start a sharing session with the following settings:" FontSize="14" Margin="0,0,0,16" TextWrapping="Wrap"/>
+                                                    
+                                                    <Grid Margin="0,0,0,8">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="120"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto"/>
+                                                            <RowDefinition Height="Auto"/>
+                                                            <RowDefinition Height="Auto"/>
+                                                            <RowDefinition Height="Auto"/>
+                                                        </Grid.RowDefinitions>
+                                                        
+                                                        <TextBlock Text="CPU Cores:" FontWeight="SemiBold" Grid.Row="0" Grid.Column="0" Margin="0,0,0,8"/>
+                                                        <TextBlock Text="{Binding ElementName=CPUSlider, Path=Value}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,8"/>
+                                                        
+                                                        <TextBlock Text="RAM (GB):" FontWeight="SemiBold" Grid.Row="1" Grid.Column="0" Margin="0,0,0,8"/>
+                                                        <TextBlock Text="{Binding ElementName=RAMSlider, Path=Value}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,8"/>
+                                                        
+                                                        <TextBlock Text="Storage (GB):" FontWeight="SemiBold" Grid.Row="2" Grid.Column="0" Margin="0,0,0,8"/>
+                                                        <TextBlock Text="{Binding ElementName=StorageSlider, Path=Value}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,8"/>
+                                                        
+                                                        <TextBlock Text="Operating System:" FontWeight="SemiBold" Grid.Row="3" Grid.Column="0" Margin="0,0,0,8"/>
+                                                        <TextBlock x:Name="SelectedOSTextBlock" Text="Windows" Grid.Row="3" Grid.Column="1" Margin="0,0,0,8"/>
+                                                    </Grid>
+                                                    
+                                                    <TextBlock Text="Are you sure you want to proceed?" FontSize="14" Margin="0,8,0,16" TextWrapping="Wrap"/>
+                                                    
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        
+                                                        <Button Content="Cancel" Grid.Column="0" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,8,0" Click="OnCancelSessionConfirmation"/>
+                                                        <Button Content="Confirm" Grid.Column="1" Style="{StaticResource PrimaryButtonStyle}" Margin="8,0,0,0" Click="OnConfirmSessionStart"/>
+                                                    </Grid>
+                                                </StackPanel>
+                                            </Border>
+                                        </Popup>
                                         
                                         <Border Background="White" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="4" Padding="12" Visibility="Collapsed" x:Name="LinkDisplayBorder">
                                             <Grid>
@@ -498,5 +608,7 @@
                 </Grid>
             </ScrollViewer>
         </Grid>
+        <!-- End of main content grid -->
+    
     </Grid>
 </Window>

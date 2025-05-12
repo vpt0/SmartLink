@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "c/ZTThzi7qw=",
+  "dgSpecHash": "U0up1AYxuoY=",
   "success": true,
-  "projectFilePath": "c:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Host\\SmartLink.Host.csproj",
+  "projectFilePath": "C:\\Users\\nt667\\source\\repos\\Smart-Link\\SmartLink.Host\\SmartLink.Host.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nt667\\.nuget\\packages\\firebaseauthentication.net\\4.1.0\\firebaseauthentication.net.4.1.0.nupkg.sha512",
     "C:\\Users\\nt667\\.nuget\\packages\\google.api.commonprotos\\2.16.0\\google.api.commonprotos.2.16.0.nupkg.sha512",
