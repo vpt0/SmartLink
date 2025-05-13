@@ -10,6 +10,8 @@ using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
 using System.Threading.Tasks;
 using SmartLink.Host;
+using System.Diagnostics;
+using System.ComponentModel;
 
 namespace SmartLink.Host.Views
 {
@@ -23,6 +25,7 @@ namespace SmartLink.Host.Views
             _userId = string.Empty;
             InitializeComponent();
             this.Loaded += DashboardView_Loaded;
+            this.Closing += DashboardView_Closing;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             
             // Initialize system monitor service
@@ -50,6 +53,13 @@ namespace SmartLink.Host.Views
                 var ramInfo = await _monitorService.GetRamInfo();
                 UpdateRamDisplay(ramInfo);
             });
+        }
+        
+        private void DashboardView_Closing(object sender, CancelEventArgs e)
+        {
+            // Stop monitoring system resources when window is closing
+            _monitorService.StopMonitoring();
+            _monitorService.SystemStatsUpdated -= OnSystemStatsUpdated;
         }
 
         private void OnProfileClick(object sender, RoutedEventArgs e)
@@ -81,8 +91,20 @@ namespace SmartLink.Host.Views
 
         private void OnRAMValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            // Update UI when RAM slider changes
-            // This is now handled by the SystemMonitorService
+            // This method handles manual changes to the RAM slider
+            // When the user manually adjusts the slider, update the display accordingly
+            if (RAMLockCheckbox.IsChecked.GetValueOrDefault())
+            {
+                // If locked, update the display based on the slider value
+                double ramValue = e.NewValue;
+                RAMUsageDisplay.Text = $"{ramValue}%";
+                
+                // Update RAM usage indicator visualization for manual changes
+                double heightPercentage = Math.Max(5, Math.Min(100, ramValue));
+                double visualHeight = (heightPercentage / 100) * 120; // Scale to the 120px height of the container
+                RAMUsageIndicator.Height = visualHeight;
+            }
+            // When unlocked, the SystemMonitorService handles updates
         }
         
         private void OnSystemStatsUpdated(object sender, SystemStatsEventArgs e)
@@ -96,10 +118,10 @@ namespace SmartLink.Host.Views
         private void UpdateRamDisplay(RamInfo ramInfo)
         {
             // Update RAM display elements
-            RAMUsageText.Text = $"{ramInfo.UsagePercentage}%";
-            RAMTotalText.Text = $"Total: {ramInfo.TotalRam}";
-            RAMAvailableText.Text = $"Available: {ramInfo.FreeRam}";
-            RAMUsedText.Text = $"Used: {ramInfo.UsedRam}";
+            RAMUsageDisplay.Text = $"{ramInfo.UsagePercentage}%";
+            RAMTotalDisplay.Text = $"Total: {ramInfo.TotalRam}";
+            RAMAvailableDisplay.Text = $"Available: {ramInfo.FreeRam}";
+            RAMUsedDisplay.Text = $"Used: {ramInfo.UsedRam}";
             
             // Update RAM slider to reflect current usage
             if (!RAMLockCheckbox.IsChecked.GetValueOrDefault())
@@ -107,6 +129,11 @@ namespace SmartLink.Host.Views
                 // Only update if not locked
                 RAMSlider.Value = ramInfo.UsagePercentage;
             }
+            
+            // Update RAM usage indicator visualization
+            double heightPercentage = Math.Max(5, Math.Min(100, ramInfo.UsagePercentage));
+            double visualHeight = (heightPercentage / 100) * 120; // Scale to the 120px height of the container
+            RAMUsageIndicator.Height = visualHeight;
         }
         private void OnRAMLockChecked(object sender, RoutedEventArgs e)
         {

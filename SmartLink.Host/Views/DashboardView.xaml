@@ -323,10 +323,15 @@
                                     <!-- RAM Column -->
                                     <StackPanel Margin="0,0,24,0">
                                         <Border Height="120" Width="32" Background="#E3F2FD" CornerRadius="8" VerticalAlignment="Bottom">
-                                            <Border Height="80" Width="32" Background="#1976D2" CornerRadius="8,8,0,0" VerticalAlignment="Bottom"/>
+                                            <Border x:Name="RAMUsageIndicator" Height="80" Width="32" Background="#1976D2" CornerRadius="8,8,0,0" VerticalAlignment="Bottom"/>
                                         </Border>
                                         <TextBlock Text="RAM" HorizontalAlignment="Center" Margin="0,8,0,0" FontWeight="SemiBold"/>
-                                        <TextBlock Text="4 GB / 8 GB" HorizontalAlignment="Center" FontSize="12" Foreground="#1976D2"/>
+                                        <StackPanel>
+                                            <TextBlock x:Name="RAMUsageText" Text="50%" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Foreground="#1976D2"/>
+                                            <TextBlock x:Name="RAMTotalText" Text="Total: 8 GB" HorizontalAlignment="Center" FontSize="11" Foreground="#666"/>
+                                            <TextBlock x:Name="RAMUsedText" Text="Used: 4 GB" HorizontalAlignment="Center" FontSize="11" Foreground="#666"/>
+                                            <TextBlock x:Name="RAMAvailableText" Text="Available: 4 GB" HorizontalAlignment="Center" FontSize="11" Foreground="#666"/>
+                                        </StackPanel>
                                     </StackPanel>
                                     <!-- CPU Column -->
                                     <StackPanel>
@@ -454,10 +459,10 @@
                                     
                                     <TextBlock Text="RAM Usage" FontWeight="SemiBold" FontSize="14"/>
                                     <StackPanel Grid.Column="1" Orientation="Vertical" Margin="0,0,12,0">
-                                        <TextBlock x:Name="RAMUsageText" Text="0%" FontWeight="SemiBold" FontSize="14" HorizontalAlignment="Right"/>
-                                        <TextBlock x:Name="RAMTotalText" Text="Total: 0 GB" FontSize="12" Foreground="#666" HorizontalAlignment="Right"/>
-                                        <TextBlock x:Name="RAMAvailableText" Text="Available: 0 GB" FontSize="12" Foreground="#666" HorizontalAlignment="Right"/>
-                                        <TextBlock x:Name="RAMUsedText" Text="Used: 0 GB" FontSize="12" Foreground="#666" HorizontalAlignment="Right"/>
+                                        <TextBlock x:Name="RAMUsageDisplay" Text="0%" FontWeight="SemiBold" FontSize="14" HorizontalAlignment="Right"/>
+                                        <TextBlock x:Name="RAMTotalDisplay" Text="Total: 0 GB" FontSize="12" Foreground="#666" HorizontalAlignment="Right"/>
+                                        <TextBlock x:Name="RAMAvailableDisplay" Text="Available: 0 GB" FontSize="12" Foreground="#666" HorizontalAlignment="Right"/>
+                                        <TextBlock x:Name="RAMUsedDisplay" Text="Used: 0 GB" FontSize="12" Foreground="#666" HorizontalAlignment="Right"/>
                                     </StackPanel>
                                     <ToggleButton x:Name="RAMLockCheckbox" Grid.Column="2" Style="{StaticResource ToggleSwitchStyle}" Checked="OnRAMLockChecked" Unchecked="OnRAMLockUnchecked"/>
                                 </Grid>
